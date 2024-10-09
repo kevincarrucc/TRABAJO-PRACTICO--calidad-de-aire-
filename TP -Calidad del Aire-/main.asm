@@ -1,4 +1,4 @@
-;
+;holo
 ; TP -Calidad del Aire-.asm
 ;
 ; Created: 4/10/2024 14:22:00
@@ -38,11 +38,11 @@ INT_:
 	LDI	R16,(1<<WGM12)|(1<<CS12)//seleccionamos el modo CTC con wgm12 / determinamos los bits para elegir el valor del prescaler que queremos (clk/256) para la fuente de reloj
 	STS	TCCR1B,R16// cargamos los bit en el registro de control B
 	LDI	R16,0
-	STS	TCCR1C,R16 // sirve para forzar una comparación de salida, pero no se modifica nada ya que no es necesario en nuestro caso
+	STS	TCCR1C,R16 // sirve para forzar una comparaciÃ³n de salida, pero no se modifica nada ya que no es necesario en nuestro caso
 	LDI	R16,(1<<OCIE1A)// habilitamos la interrupcion por comparacion de A
 	STS	TIMSK1,R16// cargamos el bit de habilitacion de la interrupcion por comparacion de A
 	LDI	R16,HIGH(12499)// como el valor es superior a 255 ya que el registro es de 8 bit se carga en dos partes parte alta
-	STS	OCR1AH,R16//cargamos la parte alta  del valor e comparación para el temporizador en modo CTC, determinando cuándo debe generarse una interrupción o un evento de salida cuando el temporizador alcanza ese valor.
+	STS	OCR1AH,R16//cargamos la parte alta  del valor e comparaciÃ³n para el temporizador en modo CTC, determinando cuÃ¡ndo debe generarse una interrupciÃ³n o un evento de salida cuando el temporizador alcanza ese valor.
 	LDI	R16,LOW(12499)// cargamos la parte baja del valor
 	STS	OCR1AL,R16// la ingresamos en el registro de comparacion
 	SEI
@@ -140,7 +140,7 @@ SIG_ADC3:
 	STS 0X0124, R1
 ; CONVERSION DE BITS A TEMPERATURA
 	LDS R16, 0X0103// extraemos de la memoria el valor de la conversion ADC 
-	LDI R17, 50// colocamos la constante para hacer que el valor en decima uno sea igual a 1°C
+	LDI R17, 50// colocamos la constante para hacer que el valor en decima uno sea igual a 1Â°C
 	CP R16, R17// comparamos para ver si la bandera nos determina que el resultado sera negativo o no
 	BRLT VERDADERO4// ahora si es positivo realizamos de una forma la resta y si es negativo la restamos inversamente 
 	SUB R16, R17
